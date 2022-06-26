@@ -3,10 +3,10 @@ close all
 X = [3 2 10 7 0 3 5];
 Y = [5 4 3 2 1];
 
-stats(X)
+stats(X,0.9)
 %multivarstat(X,Y)
 %(empirische) Kovarianz
-function stats(X)
+function stats(X,p)
 %Arithetisches Mittel
 mittel_x = mean(X);
 fprintf("Mittelwert(X) = %f\n",mittel_x)
@@ -24,7 +24,8 @@ q_025_x = quantile(X,0.25);
 fprintf("0.25quantil(X) = %f\n",q_025_x)
 q_075_x = quantile(X,0.75);
 fprintf("0.75quantil(X) = %f\n",q_075_x)
-
+pquantil_x = quantile(X,p);
+fprintf("%.2fquantil(X) = %.4f\n",p,pquantil_x)
 %(empirische) Varianz
 var_x = var(X);
 fprintf("Var(X) = %f\n",var_x)
