@@ -1,19 +1,11 @@
 clear all
 close all
-X = [1 2 3 4 5];
+X = [3 2 10 7 0 3 5];
 Y = [5 4 3 2 1];
+
 stats(X)
-multivarstat(X,Y)
+%multivarstat(X,Y)
 %(empirische) Kovarianz
-kovar_x_y = cov(X,Y);
-
-
-
-
-
-%(empirischer) Korrelationskoeffizient
-corrcoef_X_Y = corrcoef(X,Y);
-
 function stats(X)
 %Arithetisches Mittel
 mittel_x = mean(X);

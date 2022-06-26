@@ -3,10 +3,10 @@ close all
 %% Main
 
 % Beschreibende Statistik
- X = [1 2 3 4 5];
-Y = [5 4 3 2 1];
-% stats(X)
-% multivarstat(X,Y)
+ X = [25 17 25 29 20 15 11];
+%  Y = [11 11 13 9 10 7 3];
+% stats(X, 0.9)
+%  multivarstat(X,Y)
 
 %%
 % Kombinatorik
@@ -17,24 +17,24 @@ Y = [5 4 3 2 1];
 
 %%
 % Diskrete Zuvallsvariablen
-% X = [1, 2, 3, 4, 5];
-% P = [0.1, 0.25, 0.35, 0.2, 0.1];
-% zufallsvariable(5,X,P)
+% X = [2, 3, 4, 5, 6, 7, 8];
+% P = [1/16, 2/16, 3/16, 4/16, 3/16, 2/16, 1/16];
+% zufallsvariable(1,X,P)
 
 % Bernouli-Verteilung Parameter (x,p)
 % ber(0,0.8)
 
 % Geometrische-Verteilung Parameter (x,p)
-  geom(10,0.1)
+  %geom(10,0.1)
 
 % Binominal-Verteilung Parameter (x, n,p)
-% bin(1,5,0.25)
+% bin(4,11,0.55)
 
 % Poisson-Verteilung Parameter (x, lambda)
-% po(5,2)
+% po(7,7)
 
 % Exponentialverteilung Parameter (x, lambda)
-% exp(2,0.5)
+ % exp(1/7, 0.5)
 % Exponentialverteilung Intervall Parameter (x, y, lambda)
 % expIntervall(1,2,0.5)
 
@@ -46,15 +46,15 @@ Y = [5 4 3 2 1];
 % gleichverteilungIntervall(5,9,0,10)
 
 % Normalverteilung Parameter (x, mu, sigma)
-% norm(175,180.3,7.17)
+ % norm(115,130,15)
 % Norminv Parameter (p, mu, sigma)
-% normi(0.95,180.3,7.17)
+%  normi(0.05,130,15)
 %  Normalverteilung Parameter (x, mux, muy, sigmax, sigmay)
 % norm2v(380,150,190,20,sqrt(500))
 
 %% Funktionen
 % Beschreibende Statistik 
-function stats(X)
+function stats(X,p)
 %Arithetisches Mittel
 mittel_x = mean(X);
 fprintf("Mittelwert(X) = %f\n",mittel_x)
@@ -72,6 +72,8 @@ q_025_x = quantile(X,0.25);
 fprintf("0.25quantil(X) = %f\n",q_025_x)
 q_075_x = quantile(X,0.75);
 fprintf("0.75quantil(X) = %f\n",q_075_x)
+pquantil_x = quantile(X,p);
+fprintf("%.2fquantil(X) = %.4f\n",p,pquantil_x)
 
 %(empirische) Varianz
 var_x = var(X);
@@ -295,7 +297,6 @@ fprintf("P(X<=%d) = %.4f\n",x,P_X_le_x)
 % P(X>=x)
 P_X_me_x = 1- binocdf(x,n,p);
 fprintf("P(X>=%d) = %.4f\n",x,P_X_me_x)
-
 end
 
 % Poisson-Verteilung X~Po(lambda)
@@ -335,7 +336,6 @@ fprintf("P(X>=%.4f) = %.4f\n",x,P_X_me_x)
 end
 
 function expIntervall(x,y, lambda)
-
 P_X_intervall = expcdf(y*lambda) - expcdf(x*lambda);
 fprintf("P(%.4f < X < %.4f) = %.4f\n",x,y,P_X_intervall)
 end
