@@ -3,52 +3,58 @@ close all
 %% Main
 
 % Beschreibende Statistik
- X = [25 17 25 29 20 15 11];
-%  Y = [11 11 13 9 10 7 3];
-% stats(X, 0.9)
-%  multivarstat(X,Y)
+% X = [5 7 4 25];
+%  Y = [55 60 40 70 45 40 65 55];
+% Z = [3 10 9 1 5 10 2 3]
+% Parameter(X, p-Quantil)
+% stats(X, 0.625)
+% multivarstat(X,Y)
 
 %%
 % Kombinatorik
 % Permutation ohne Wiederholung Parameter (n)
 % comb(10)
 % Restliche Kombinatorik Parameter (n, k)
-% comb2(10,3)
+% comb2(49,6)
 
 %%
 % Diskrete Zuvallsvariablen
-% X = [2, 3, 4, 5, 6, 7, 8];
-% P = [1/16, 2/16, 3/16, 4/16, 3/16, 2/16, 1/16];
-% zufallsvariable(1,X,P)
+X = [-3, -2, -1, 0, 1, 2, 3];
+P = [3/13 ,2/12, 1/13, 0, 1/12, 2/12, 3/12];
+zufallsvariable(2,X,P)
 
 % Bernouli-Verteilung Parameter (x,p)
 % ber(0,0.8)
 
 % Geometrische-Verteilung Parameter (x,p)
-  %geom(10,0.1)
+%  geom(3,0.34)
+% geom Quantil Parameter(qu,p) 
+%  geomInv(0.5,0.34)
 
 % Binominal-Verteilung Parameter (x, n,p)
 % bin(4,11,0.55)
 
 % Poisson-Verteilung Parameter (x, lambda)
-% po(7,7)
+%  po(9,6)
 
 % Exponentialverteilung Parameter (x, lambda)
- % exp(1/7, 0.5)
+% exp(1/7, 7)
 % Exponentialverteilung Intervall Parameter (x, y, lambda)
-% expIntervall(1,2,0.5)
+% expIntervall(0, 5.5452,1/8)
+% Exponentialverteilung Quantil Parameter (qu, lambda)
+% expInv(0.9, 7)
 
 %%
 % Stetige Zufallsvariablen
 % Gleichverteilung Parameter (x, a, b) 
-% gleichverteilung(3,0,10)
+% gleichverteilung(100,50,180)
 % Gleichverteilung Intervall Parameter (x, y, a, b) 
 % gleichverteilungIntervall(5,9,0,10)
 
 % Normalverteilung Parameter (x, mu, sigma)
- % norm(115,130,15)
+%  norm(12,13,1)
 % Norminv Parameter (p, mu, sigma)
-%  normi(0.05,130,15)
+%   normi(0.035+0.93,13,1)
 %  Normalverteilung Parameter (x, mux, muy, sigmax, sigmay)
 % norm2v(380,150,190,20,sqrt(500))
 
@@ -57,41 +63,32 @@ close all
 function stats(X,p)
 %Arithetisches Mittel
 mittel_x = mean(X);
-fprintf("Mittelwert(X) = %f\n",mittel_x)
-
+fprintf("Mittelwert(X) = %.4f\n",mittel_x)
 %Median
 median_x = quantile(X,0.5);
-fprintf("Median(X) = %f\n",median_x)
-
+fprintf("Median(X) = %.4f\n",median_x)
 %Modalwert
 modal_x = mode(X);
-fprintf("Modal(X) = %f\n",modal_x)
-
+fprintf("Modal(X) = %.4f\n",modal_x)
 %Quartile
 q_025_x = quantile(X,0.25);
-fprintf("0.25quantil(X) = %f\n",q_025_x)
+fprintf("0.25quantil(X) = %.4f\n",q_025_x)
 q_075_x = quantile(X,0.75);
-fprintf("0.75quantil(X) = %f\n",q_075_x)
+fprintf("0.75quantil(X) = %.4f\n",q_075_x)
 pquantil_x = quantile(X,p);
-fprintf("%.2fquantil(X) = %.4f\n",p,pquantil_x)
-
+fprintf("%.3fquantil(X) = %.4f\n",p,pquantil_x)
 %(empirische) Varianz
 var_x = var(X);
 fprintf("Var(X) = %f\n",var_x)
-
 %(empirische) Standardabweichung
 std_x = std(X);
 fprintf("Std(X) = %f\n",std_x)
-
 %Spannweite
 spann_x = max(X) - min(X);
 fprintf("Spannweite(X) = %f\n",spann_x)
-
 %Interquartilabstand
 I = q_075_x - q_025_x;
 fprintf("Interquartilabstand(X) = %f\n",I)
-
-
 end
 
 function multivarstat(X,Y)
@@ -158,12 +155,12 @@ fprintf("P(X>=%d) = %.4f\n",x, 1-f_x)
 % Verteilung
 subplot(1,2,1)
 stem(X,P)
-xlim([0,length(X) + 1])
+xlim([X(1)-1,X(length(X)) + 1])
 ylim([0,max(P)+0.05])
 % Verteilungsfunktion
 subplot(1,2,2)
 stairs(cumsum(P));
-xlim([1,length(X) + 1])
+xlim([X(1)-1,X(length(X)) + 1])
 ylim([0,1])
 end
 
@@ -207,16 +204,12 @@ end
 % Bernouli Verteilung X~Ber(p)
 function ber(x,p)
 q = 1-p;
-
 % Erwartungswert
 fprintf("E(X)= p = %.4f\n",p)
-
 % Varianz
 fprintf("Var(X)= pq = %.4f\n",p*q)
-
 % Standardabweichung
 fprintf("Std(X)= %4f\n",sqrt(p*q))
-
 % P(X=x)
 p_x = 0;
 if x == 1
@@ -259,11 +252,9 @@ fprintf("Std(X) = %.4f\n\n", geom_Std_X)
 % P(X = x) 
 geom_P_X_e_x = geopdf(x-1,p);
 fprintf("P(X=%d) = %.4f\n",x, geom_P_X_e_x)
-
 % P(X<=x)
 geom_P_X_le_x = geocdf(x-1,p);
 fprintf("P(X<=%d) = %.4f\n",x, geom_P_X_le_x)
-
 %P(X < x)
 fprintf("P(X<%d) = %.4f\n", x, geom_P_X_le_x-geom_P_X_e_x)
 
@@ -275,10 +266,14 @@ fprintf("P(X>=%d) = %.4f\n",x, geom_P_X_me_x)
 fprintf("P(X>%d) = %.4f\n", x, geom_P_X_me_x-geom_P_X_e_x)
 end
 
+function geomInv(qu,p)
+xp = log(abs(qu -1)) / log(1-p);
+fprintf("x%.3f = %.4f\n",qu, xp)
+end
+
 % Binominal-Verteilung X~Bin(n,p)
 function bin(x,n,p)
 q = 1-p;
-
 % Erwartungswert
 E_x = n*p;
 fprintf("E(x) = %.4f\n",E_x)
@@ -301,7 +296,6 @@ end
 
 % Poisson-Verteilung X~Po(lambda)
 function po(x, lambda)
-
 % Erwartungsert
 fprintf("E(X) = %.4f\n",lambda)
 %Varianz
@@ -340,6 +334,11 @@ P_X_intervall = expcdf(y*lambda) - expcdf(x*lambda);
 fprintf("P(%.4f < X < %.4f) = %.4f\n",x,y,P_X_intervall)
 end
 
+function expInv(qu, lambda)
+xp = log(abs(1-qu)) / -lambda;
+fprintf("x%.3f = %.4f\n",qu, xp)
+end
+
 % Gleichverteilung X~U(a,b)
 function gleichverteilung(x,a,b)
 % Erwartungswert
@@ -354,7 +353,7 @@ fprintf("Std(X) = %.4f\n\n", Std_X)
 P_X_le_x = 0;
 f_x = 0;
 if a <= x && x <= b
-    P_X_le_x = (x-a)/b-a;
+    P_X_le_x = (x-a)/(b-a);
     f_x = 1/(b-a);
 else
 if x > b
@@ -363,6 +362,7 @@ end
 end
 fprintf("f(%.4f) = %.4f\n",x,f_x)
 fprintf("P(X<=%.4f) = %.4f\n",x,P_X_le_x)
+fprintf("P(X>=%.4f) = %.4f\n",x,1-P_X_le_x)
 end
 
 function gleichverteilungIntervall(x,y,a,b)
@@ -417,4 +417,4 @@ function normi (p, mu,sigma)
 %xp
 x = norminv(p,mu,sigma);
 fprintf("x%.2f = %.4f\n", p, x)
-    end
+end
