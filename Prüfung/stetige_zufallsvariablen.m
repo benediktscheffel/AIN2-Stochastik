@@ -58,7 +58,7 @@ fprintf("Std(X) = %.4f\n\n", Std_X)
 P_X_le_x = 0;
 f_x = 0;
 if a <= x && x <= b
-    P_X_le_x = (x-a)/b-a;
+    P_X_le_x = (x-a)/(b-a);
     f_x = 1/(b-a);
 else
 if x > b
@@ -73,14 +73,14 @@ function gleichverteilungIntervall(x,y,a,b)
 P_X_le_x = 0;
 P_X_le_y = 0;
 if a <= x && x <= b
-    P_X_le_x = (x-a)/b-a;
+    P_X_le_x = (x-a)/(b-a);
 else
 if x > b
     P_X_le_x = 1;
 end
 end
 if a <= y && y <= b
-    P_X_le_y = (y-a)/b-a;
+    P_X_le_y = (y-a)/(b-a);
 else
 if y > b
     P_X_le_y =1;
