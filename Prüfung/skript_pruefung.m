@@ -349,7 +349,7 @@ Var_X = (b-a)^2/12;
 fprintf("Var(X) = %.4f\n",Var_X)
 % Standardabweichung
 Std_X = sqrt(Var_X);
-fprintf("Std(X) = %.4f\n\n", Std_X)
+fprintf("Std(X  ) = %.4f\n\n", Std_X)
 P_X_le_x = 0;
 f_x = 0;
 if a <= x && x <= b
@@ -376,7 +376,7 @@ if x > b
 end
 end
 if a <= y && y <= b
-    P_X_le_y = (y-a)/b-a;
+    P_X_le_y = (y-a)/(b-a);
 else
 if y > b
     P_X_le_y =1;
