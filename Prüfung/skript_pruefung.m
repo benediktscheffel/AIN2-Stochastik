@@ -369,7 +369,7 @@ function gleichverteilungIntervall(x,y,a,b)
 P_X_le_x = 0;
 P_X_le_y = 0;
 if a <= x && x <= b
-    P_X_le_x = (x-a)/b-a;
+    P_X_le_x = (x-a)/(b-a);
 else
 if x > b
     P_X_le_x = 1;
