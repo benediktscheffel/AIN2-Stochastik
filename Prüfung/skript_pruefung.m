@@ -3,11 +3,11 @@ close all
 %% Main
 
 % Beschreibende Statistik
-% X = [5 7 4 25];
-%  Y = [55 60 40 70 45 40 65 55];
+% X = [10 25 25 25 30 35];
+% Y = [55 60 40 70 45 40 65 55];
 % Z = [3 10 9 1 5 10 2 3]
 % Parameter(X, p-Quantil)
-% stats(X, 0.625)
+% stats(X, 0.1)
 % multivarstat(X,Y)
 
 %%
@@ -15,47 +15,47 @@ close all
 % Permutation ohne Wiederholung Parameter (n)
 % comb(10)
 % Restliche Kombinatorik Parameter (n, k)
-% comb2(49,6)
+% comb2(14,2)
 
 %%
 % Diskrete Zuvallsvariablen
-X = [-3, -2, -1, 0, 1, 2, 3];
-P = [3/13 ,2/12, 1/13, 0, 1/12, 2/12, 3/12];
-zufallsvariable(2,X,P)
+% X = [1, 2, 3, 4, 5];
+% P = [0.1, 0.25, 0.35, 0.2, 0.1];
+% zufallsvariable(2,X,P)
 
 % Bernouli-Verteilung Parameter (x,p)
 % ber(0,0.8)
 
 % Geometrische-Verteilung Parameter (x,p)
-%  geom(3,0.34)
+%  geom(10,0.1)
 % geom Quantil Parameter(qu,p) 
 %  geomInv(0.5,0.34)
 
 % Binominal-Verteilung Parameter (x, n,p)
-% bin(4,11,0.55)
+% bin(2,50,0.03)
 
 % Poisson-Verteilung Parameter (x, lambda)
-%  po(9,6)
-
-% Exponentialverteilung Parameter (x, lambda)
-% exp(1/7, 7)
-% Exponentialverteilung Intervall Parameter (x, y, lambda)
-% expIntervall(0, 5.5452,1/8)
-% Exponentialverteilung Quantil Parameter (qu, lambda)
-% expInv(0.9, 7)
+%  po(3,10)
 
 %%
 % Stetige Zufallsvariablen
+% Exponentialverteilung Parameter (x, lambda)
+% exp(0.5,2)
+% Exponentialverteilung Intervall Parameter (x, y, lambda)
+% expIntervall(0, 5.5452,1/8)
+% Exponentialverteilung Quantil Parameter (qu, lambda)
+% expInv(0.9, 1/800)
+
 % Gleichverteilung Parameter (x, a, b) 
-% gleichverteilung(100,50,180)
+% gleichverteilung(500,200,600)
 % Gleichverteilung Intervall Parameter (x, y, a, b) 
-% gleichverteilungIntervall(5,9,0,10)
+% gleichverteilungIntervall(200,300,200,600)
 
 % Normalverteilung Parameter (x, mu, sigma)
-%  norm(12,13,1)
+% norm(350,300,50)
 % Norminv Parameter (p, mu, sigma)
-%   normi(0.035+0.93,13,1)
-%  Normalverteilung Parameter (x, mux, muy, sigmax, sigmay)
+% normi(0.965,13,1)
+% Normalverteilung 2 Variablen Parameter (x, mux, muy, sigmax, sigmay)
 % norm2v(380,150,190,20,sqrt(500))
 
 %% Funktionen
@@ -259,7 +259,7 @@ fprintf("P(X<=%d) = %.4f\n",x, geom_P_X_le_x)
 fprintf("P(X<%d) = %.4f\n", x, geom_P_X_le_x-geom_P_X_e_x)
 
 % P(X>=x)
-geom_P_X_me_x = 1 - geocdf(x-1,p);
+geom_P_X_me_x = 1 - geocdf(x-2,p);
 fprintf("P(X>=%d) = %.4f\n",x, geom_P_X_me_x)
 
 % P(X>x)
@@ -290,7 +290,7 @@ fprintf("P(X=%d) = %.4f\n",x,P_X_e_x)
 P_X_le_x = binocdf(x,n,p);
 fprintf("P(X<=%d) = %.4f\n",x,P_X_le_x)
 % P(X>=x)
-P_X_me_x = 1- binocdf(x,n,p);
+P_X_me_x = 1- binocdf(x-1,n,p);
 fprintf("P(X>=%d) = %.4f\n",x,P_X_me_x)
 end
 
@@ -307,7 +307,7 @@ fprintf("P(X=%d) = %.4f\n",x,poisspdf(x,lambda))
 %P(X<=x)
 fprintf("P(X<=%d) = %.4f\n",x,poisscdf(x,lambda))
 %P(X>=x)
-fprintf("P(X>=%d) = %.4f\n",x,1 - poisscdf(x,lambda))
+fprintf("P(X>=%d) = %.4f\n",x,1 - poisscdf(x-1,lambda))
 end
 
 % Exponentialverteilung X~exp(lambda)
